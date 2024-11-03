@@ -24,14 +24,9 @@ public class Parser {
 
                 // Alcune ricette potrebbero non avere un valore di calorie
                 int calorie = 0; // Default
-                Element calorieElement = recipeElement.select(".calorie-info").first(); // Sostituisci con il selettore corretto
-                if (calorieElement != null) {
-                    try {
-                        calorie = Integer.parseInt(calorieElement.text().replaceAll("[^\\d]", ""));
-                    } catch (NumberFormatException e) {
-                        System.out.println("Calorie non trovate o formato non valido");
-                    }
-                }
+                String kcalString = recipeElement.select(".gz-single-data-recipe").text(); // Sostituisci con il selettore corretto
+                calorie = Integer.parseInt(kcalString.split(" ")[kcalString.split(" ").length-1]);
+
 
                 // Crea un nuovo oggetto Ricetta e aggiungilo alla lista
                 Ricetta ricetta = new Ricetta(titolo, url, calorie, linkImmagine);
